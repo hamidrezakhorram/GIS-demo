@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH', 'C:\\Program Files\\GDAL\\bin\\gdal.dll')
+os.environ["GDAL_DATA"] = r"C:\\Program Files\\GDAL\\gdal-data"
+os.environ["PROJ_LIB"] = r"C:\\Program Files\\GDAL\\projlib"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'locations',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +82,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'Gis-doem',
         'USER': 'postgres',
         'PASSWORD': 'hamid13851397',
