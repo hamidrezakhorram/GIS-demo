@@ -12,6 +12,6 @@ tzdata==2025.1
 #api libraries
 djangorestframework==3.15.2
 
-
-
+#third party libraries
+django-filter==25.1
 
