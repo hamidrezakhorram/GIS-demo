@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 
-# Create your models here.
 class Location(models.Model):
     class StatusChoices(models.TextChoices):
         NEW = 'NEW', 'New'
@@ -10,9 +9,14 @@ class Location(models.Model):
     name = models.CharField(max_length=255)
     code = models.IntegerField();
     image_name = models.CharField(max_length=255 , unique=True)
-    image = models.ImageField(upload_to='locations/',blank=True,null=True)
-    audio = models.FileField(upload_to='locations/',blank=True,null=True)
-    video = models.FileField(upload_to='locations/',blank=True,null=True)
+    image = models.ImageField(
+        upload_to='media/locations/image',
+        default='media/locations/image/blank.jpg',
+        blank=True,
+        null=True
+    )
+    audio = models.FileField(upload_to='media/locations/audio',blank=True,null=True)
+    video = models.FileField(upload_to='media/locations/video',blank=True,null=True)
     geom = gis_models.PointField()
     point_type = models.CharField(
         max_length=3,
