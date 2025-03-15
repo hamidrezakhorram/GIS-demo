@@ -7,5 +7,5 @@ class LocationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model=Location
-        fields = ['id', 'name', 'code','geom','point_type' , 'created_at','updated_at', 'image_name','image']
+        fields = ['id', 'name', 'code','geom','point_type' , 'created_at','updated_at', 'image_name','image', 'audio', 'video']
 
