@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'locations',
+    'layers',
     'rest_framework',
     'django_filters',
     'drf_yasg',
