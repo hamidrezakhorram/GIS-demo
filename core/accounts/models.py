@@ -49,6 +49,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_set',
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+        verbose_name='groups',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_set',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
+    )
+
     def __str__(self):
         return self.phone_number
     
@@ -59,20 +75,26 @@ class Profile(models.Model):
     Profile model
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=250)
-    last_name = models.CharField(max_length=250)
-    national_id = models.CharField(max_length=250, unique=True)
+    first_name = models.CharField(max_length=250, blank=True, null=True)
+    last_name = models.CharField(max_length=250, blank=True, null=True)
+
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return f"{self.first_name or 'No Name'} {self.last_name or ''}"
     
 @receiver(post_save, sender=User)
-
 def save_profile(sender, instance, created, **kwargs):
     """
     Save profile for all users that are created
     """
     if created:
-        Profile.objects.get_or_create(user=instance)    
+        Profile.objects.get_or_create(
+            user=instance,
+            defaults={
+                'first_name': '',
+                'last_name': '',
+                
+            }
+        )    
