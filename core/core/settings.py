@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'layers',
     'accounts',
     'rest_framework',
+    'rest_framework_simplejwt',
     'django_filters',
     'drf_yasg',
 ]
@@ -140,3 +141,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
+
+# Rest Framework Settings
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
+}
