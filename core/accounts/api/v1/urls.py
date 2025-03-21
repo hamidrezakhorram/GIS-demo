@@ -13,6 +13,7 @@ urlpatterns = [
     path('jwt/create/', views.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('jwt/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('jwt/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('register/', views.RegistrationView.as_view(), name='register'),
     #path('activation/confirm)
 ]
 
