@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
-
-class Location(models.Model):
+from accounts.models import User
+class Points(models.Model):
     class StatusChoices(models.TextChoices):
         NEW = 'NEW', 'New'
         OLD = 'OLD', 'Old'
     
     name = models.CharField(max_length=255)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.IntegerField();
     image_name = models.CharField(max_length=255 , unique=True)
     image = models.ImageField(
@@ -23,7 +24,7 @@ class Location(models.Model):
         choices=StatusChoices.choices,
         default=StatusChoices.NEW
     )
-    # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     #synce_status = models.BooleanField(default=False)
     #inside_polygon = models.BooleanField(default=False)
     
