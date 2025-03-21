@@ -5,5 +5,5 @@ app_name = 'locations'
 
 urlpatterns = [
     path('', views.LocationsView.as_view(), name='locations'),
-    path('api/', include('locations.api.urls')),
+    path('api/v1/', include('locations.api.v1.urls')),
 ]
