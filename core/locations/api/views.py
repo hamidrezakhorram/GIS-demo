@@ -14,7 +14,7 @@ class LocationViewSet(viewsets.ModelViewSet):
    # permission_classes = [IsAdminUser]
     queryset = Points.objects.all()
     serializer_class = LocationSerializer
-    pagination_class = LocationPagination
+    
     filter_backends = [DjangoFilterBackend , SearchFilter , OrderingFilter]
     filterset_fields = ['point_type']
     search_fields = ['name']
