@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 1rem;
+        }
+        .success {
+            color: green;
+            margin-top: 1rem;
+        }
+        #logoutSection {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loginSection">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button onclick="login()">Login</button>
+            <div id="loginError" class="error"></div>
+        </div>
+
+        <div id="logoutSection">
+            <h2>Welcome!</h2>
+            <p id="userPhone"></p>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is already logged in
+        window.onload = function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                showLogoutSection();
+            }
+        }
+
+        async function login() {
+            const phone = document.getElementById('phone_number').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/accounts/api/v1/jwt/create/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phone_number: phone,
+                        password: password
+                    })
+                });
+
+                // Check if response is JSON
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Server returned non-JSON response. API endpoint might be incorrect.');
+                }
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Invalid credentials');
+                }
+                
+                // Store tokens
+                localStorage.setItem('token', data.access);
+                localStorage.setItem('refresh_token', data.refresh);
+                
+                // Show success and logout section
+                showLogoutSection();
+                document.getElementById('userPhone').textContent = `Logged in as: ${phone}`;
+                document.getElementById('loginError').textContent = '';
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('loginError').textContent = error.message || 'Login failed. Please try again.';
+            }
+        }
+
+        function logout() {
+            // Clear tokens
+            localStorage.removeItem('token');
+            localStorage.removeItem('refresh_token');
+            
+            // Show login section
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('logoutSection').style.display = 'none';
+            
+            // Clear form
+            document.getElementById('phone_number').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function showLogoutSection() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('logoutSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
