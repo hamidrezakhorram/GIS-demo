@@ -11,7 +11,7 @@ class LocationViewSet(viewsets.ModelViewSet):
     """
     ViewSet for the Location model and Points
     """
-   # permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser]
     queryset = Points.objects.all()
     serializer_class = LocationSerializer
     
