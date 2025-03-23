@@ -30,6 +30,9 @@ class LocationSerializer(serializers.ModelSerializer):
         Validate the custom_fields to ensure it is a dictionary
         and contains key-value pairs with valid types.
         """
+        if value is None or value == {}:
+           value = {}
+           return value
         if not isinstance(value, dict):
             raise serializers.ValidationError(
                 "Custom fields must be a dictionary."
