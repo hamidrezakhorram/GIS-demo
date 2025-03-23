@@ -1,6 +1,10 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import CustomTokenObtainPairSerializer , ChangepasswordSerializer , ProfileSerializer
-from rest_framework import generics , status
+from .serializers import (
+    CustomTokenObtainPairSerializer,
+    ChangepasswordSerializer,
+    ProfileSerializer,
+)
+from rest_framework import generics, status
 from .serializers import RegistrationSerializer
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
@@ -8,18 +12,23 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotAuthenticated
 from django.shortcuts import get_object_or_404
 from accounts.models import Profile
+
 User = get_user_model()
+
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     """
     View for user login using JWT
     """
+
     serializer_class = CustomTokenObtainPairSerializer
+
 
 class RegistrationView(generics.GenericAPIView):
     """
     View for user registration
     """
+
     serializer_class = RegistrationSerializer
 
     def post(self, request, *args, **kwargs):
@@ -29,7 +38,7 @@ class RegistrationView(generics.GenericAPIView):
             data = {"phone_number": serializer.validated_data["phone_number"]}
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 class ChangePasswordView(generics.GenericAPIView):
     model = User

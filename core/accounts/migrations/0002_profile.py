@@ -26,7 +26,10 @@ class Migration(migrations.Migration):
                 ),
                 ("first_name", models.CharField(max_length=250)),
                 ("last_name", models.CharField(max_length=250)),
-                ("national_id", models.CharField(max_length=250, unique=True)),
+                (
+                    "national_id",
+                    models.CharField(max_length=250, unique=True),
+                ),
                 ("created_date", models.DateTimeField(auto_now_add=True)),
                 ("updated_date", models.DateTimeField(auto_now=True)),
                 (

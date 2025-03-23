@@ -6,23 +6,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('locations', '0001_initial'),
+        ("locations", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='location',
-            name='audio',
-            field=models.FileField(blank=True, null=True, upload_to='media/locations/audio'),
+            model_name="location",
+            name="audio",
+            field=models.FileField(
+                blank=True, null=True, upload_to="media/locations/audio"
+            ),
         ),
         migrations.AlterField(
-            model_name='location',
-            name='image',
-            field=models.ImageField(blank=True, default='media/locations/image/blank.jpg', null=True, upload_to='media/locations/image'),
+            model_name="location",
+            name="image",
+            field=models.ImageField(
+                blank=True,
+                default="media/locations/image/blank.jpg",
+                null=True,
+                upload_to="media/locations/image",
+            ),
         ),
         migrations.AlterField(
-            model_name='location',
-            name='video',
-            field=models.FileField(blank=True, null=True, upload_to='media/locations/video'),
+            model_name="location",
+            name="video",
+            field=models.FileField(
+                blank=True, null=True, upload_to="media/locations/video"
+            ),
         ),
     ]

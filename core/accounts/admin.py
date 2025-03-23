@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import User, Profile
 from django.contrib.auth.admin import UserAdmin
 
+
 class CustomUserAmin(UserAdmin):
     model = User
     list_display = ("phone_number", "is_staff", "is_active")
@@ -15,11 +16,10 @@ class CustomUserAmin(UserAdmin):
             {
                 "fields": (
                     "is_active",
-                    'is_superuser',
+                    "is_superuser",
                     "is_staff",
-                    'groups',
-                    'user_permissions',
-                    
+                    "groups",
+                    "user_permissions",
                 )
             },
         ),
@@ -35,12 +35,11 @@ class CustomUserAmin(UserAdmin):
                     "password2",
                     "is_staff",
                     "is_active",
-                    
-                   
                 ),
             },
         ),
     )
+
 
 admin.site.register(User, CustomUserAmin)
 admin.site.register(Profile)

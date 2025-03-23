@@ -8,24 +8,56 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name="Location",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('code', models.IntegerField()),
-                ('image_name', models.CharField(max_length=255, unique=True)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='locations/')),
-                ('audio', models.FileField(blank=True, null=True, upload_to='locations/')),
-                ('video', models.FileField(blank=True, null=True, upload_to='locations/')),
-                ('geom', django.contrib.gis.db.models.fields.PointField(srid=4326)),
-                ('point_type', models.CharField(choices=[('NEW', 'New'), ('OLD', 'Old')], default='NEW', max_length=3)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("code", models.IntegerField()),
+                ("image_name", models.CharField(max_length=255, unique=True)),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="locations/"
+                    ),
+                ),
+                (
+                    "audio",
+                    models.FileField(
+                        blank=True, null=True, upload_to="locations/"
+                    ),
+                ),
+                (
+                    "video",
+                    models.FileField(
+                        blank=True, null=True, upload_to="locations/"
+                    ),
+                ),
+                (
+                    "geom",
+                    django.contrib.gis.db.models.fields.PointField(srid=4326),
+                ),
+                (
+                    "point_type",
+                    models.CharField(
+                        choices=[("NEW", "New"), ("OLD", "Old")],
+                        default="NEW",
+                        max_length=3,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
     ]

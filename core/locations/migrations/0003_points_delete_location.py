@@ -10,7 +10,10 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("locations", "0002_alter_location_audio_alter_location_image_and_more"),
+        (
+            "locations",
+            "0002_alter_location_audio_alter_location_image_and_more",
+        ),
     ]
 
     operations = [
@@ -41,16 +44,23 @@ class Migration(migrations.Migration):
                 (
                     "audio",
                     models.FileField(
-                        blank=True, null=True, upload_to="media/locations/audio"
+                        blank=True,
+                        null=True,
+                        upload_to="media/locations/audio",
                     ),
                 ),
                 (
                     "video",
                     models.FileField(
-                        blank=True, null=True, upload_to="media/locations/video"
+                        blank=True,
+                        null=True,
+                        upload_to="media/locations/video",
                     ),
                 ),
-                ("geom", django.contrib.gis.db.models.fields.PointField(srid=4326)),
+                (
+                    "geom",
+                    django.contrib.gis.db.models.fields.PointField(srid=4326),
+                ),
                 (
                     "point_type",
                     models.CharField(

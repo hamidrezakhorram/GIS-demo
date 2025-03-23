@@ -7,19 +7,40 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Layer',
+            name="Layer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('layer_type', models.CharField(choices=[('Polyline', 'Polyline'), ('Polygon', 'Polygon')], max_length=255)),
-                ('file', models.FileField(blank=True, null=True, upload_to='media/layers/file')),
-                ('uploaded_at', models.DateTimeField(auto_now_add=True)),
-                ('label_enabled', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                (
+                    "layer_type",
+                    models.CharField(
+                        choices=[
+                            ("Polyline", "Polyline"),
+                            ("Polygon", "Polygon"),
+                        ],
+                        max_length=255,
+                    ),
+                ),
+                (
+                    "file",
+                    models.FileField(
+                        blank=True, null=True, upload_to="media/layers/file"
+                    ),
+                ),
+                ("uploaded_at", models.DateTimeField(auto_now_add=True)),
+                ("label_enabled", models.BooleanField(default=False)),
             ],
         ),
     ]

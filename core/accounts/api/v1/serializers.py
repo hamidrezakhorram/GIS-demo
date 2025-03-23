@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from accounts.models import User , Profile
+from accounts.models import User, Profile
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 
@@ -9,17 +9,20 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
     Serializer for user login using JWT
     """
+
     def validate(self, attrs):
         validated_data = super().validate(attrs)
-        
+
         validated_data["phone_number"] = self.user.phone_number
         validated_data["id"] = self.user.id
         return validated_data
-    
+
+
 class RegistrationSerializer(serializers.ModelSerializer):
     """
     Serializer for user registration
     """
+
     password1 = serializers.CharField(max_length=255, write_only=True)
 
     class Meta:
@@ -42,6 +45,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop("password1", None)
         return User.objects.create_user(**validated_data)
+
 
 class ChangepasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
@@ -66,7 +70,9 @@ class ChangepasswordSerializer(serializers.Serializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    phone_number = serializers.CharField(source="user.phone_number", read_only=True)
+    phone_number = serializers.CharField(
+        source="user.phone_number", read_only=True
+    )
 
     class Meta:
         model = Profile
