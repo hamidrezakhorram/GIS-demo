@@ -24,6 +24,7 @@ class Points(models.Model):
         choices=StatusChoices.choices,
         default=StatusChoices.NEW
     )
+    custom_fields = models.JSONField(default=dict, blank=True)
     
     #synce_status = models.BooleanField(default=False)
     #inside_polygon = models.BooleanField(default=False)
