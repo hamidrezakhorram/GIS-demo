@@ -154,10 +154,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     )
 }
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-]
+
 
 # Login Redirect
 LOGIN_REDIRECT_URL = "/"

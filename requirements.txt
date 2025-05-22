@@ -1,18 +1,30 @@
-
-#basic libraries
 asgiref==3.8.1
+attrs==25.3.0
+cffi==1.17.1
+cryptography==44.0.2
 Django==4.2
 django-filter==25.1
+django-pgcrypto==3.0.3
+djangorestframework==3.15.2
+djangorestframework_simplejwt==5.5.0
+drf-yasg==1.21.10
+importlib_resources==6.5.2
+inflection==0.5.1
+jsonschema==4.23.0
+jsonschema-specifications==2024.10.1
 Markdown==3.7
+packaging==24.2
 pillow==11.1.0
 psycopg2-binary==2.9.10
+pycparser==2.22
+pycryptodome==3.22.0
+PyJWT==2.9.0
+pytz==2025.1
+PyYAML==6.0.2
+referencing==0.36.2
+rpds-py==0.23.1
 sqlparse==0.5.3
-tzdata==2025.1
-
-#api libraries
-djangorestframework==3.15.2
 swagger-spec-validator==3.0.4
-
-#third party libraries
-django-filter==25.1
-
+typing_extensions==4.12.2
+tzdata==2025.1
+uritemplate==4.1.1
